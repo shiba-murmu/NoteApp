@@ -1,0 +1,37 @@
+:root {
+  /* ========= COLORS ========= */
+
+  --color-bg: #030712;
+  --color-surface: #111827;
+  --color-surface-light: #1f2937;
+
+  --color-primary: #10b981;
+  --color-primary-hover: #059669;
+
+  --color-secondary: #06b6d4;
+
+  --color-text: #f9fafb;
+  --color-text-muted: #9ca3af;
+
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  /* ========= RADIUS ========= */
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  /* ========= SHADOW ========= */
+
+  --shadow-card: 0 25px 80px rgba(0, 0, 0, 0.45);
+
+  --shadow-button: 0 10px 35px rgba(16, 185, 129, 0.35);
+
+  /* ========= TRANSITION ========= */
+
+  --transition: 250ms ease;
+
+  /* ========= CONTAINER ========= */
+
+  --container: 1280px;
+}
