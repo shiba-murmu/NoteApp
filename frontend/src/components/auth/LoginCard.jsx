@@ -7,7 +7,7 @@ import AuthInput from "./AuthInput";
 
 export default function LoginCard() {
   return (
-   <Card className="w-full max-w-[560px] p-6 sm:p-8 lg:p-10">
+   <Card className="w-full md:mt-10 max-w-[560px] p-6 sm:p-8 lg:p-10">
 
       {/* Heading */}
 

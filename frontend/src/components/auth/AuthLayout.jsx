@@ -15,7 +15,7 @@ export default function AuthLayout({ children }) {
 
             </div>
 
-            <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl">
+          <div className="relative z-10 mx-auto grid min-h-screen max-w-7xl grid-cols-1 pt-24 lg:flex lg:items-center lg:gap-12 lg:pt-0">
 
                 {/* Left */}
 
@@ -27,7 +27,7 @@ export default function AuthLayout({ children }) {
 
                 {/* Right */}
 
-                <div className="flex w-full items-center justify-center px-6 py-10 lg:w-1/2">
+                <div className="flex w-full md:mt-20 items-center justify-center px-6 py-10 lg:w-1/2">
 
                     {children}
 
