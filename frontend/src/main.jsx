@@ -8,10 +8,20 @@ import Footer from './components/layout/Footer.jsx'
 
 
 function Layout() {
+    
     const location = useLocation();
 
+    const protectedRoutes = [
+        "/dashboard",
+        "/task",
+        "/calendar",
+        "/messages",
+        "/analytics",
+        "/settings",
+    ]
+
     // Routes that should NOT show the landing navbar/footer
-    const hideLayout = location.pathname.startsWith("/dashboard");
+    const hideLayout = protectedRoutes.some((route) => location.pathname.startsWith(route));
     return (
         <>
             {!hideLayout && <Navbar />}
