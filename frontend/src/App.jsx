@@ -4,7 +4,7 @@ import Login from './pages/Login'
 import LandingPage from './pages/LandingPage'
 import RegisterPage from './pages/RegisterPage'
 import ScrollToTop from './components/common/ScrollToTop'
-import CommunityHero from './components/community/CommunityHero'
+import PageNotFound from './pages/PageNotFound'
 function App() {
     return (
         <>
@@ -13,7 +13,9 @@ function App() {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<RegisterPage />} />
-                <Route path="/community" element={<CommunityHero />} />
+
+                {/* 404 Route */}
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
         </>
     )
