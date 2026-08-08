@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 
 import Logo from "../common/Logo";
 import Button from "../common/Button";
+import { MainContentData } from "../../data/ChangebleData";
 
 const navLinks = [
     {
@@ -222,11 +223,11 @@ export default function Navbar() {
                         >
                             {/* <Logo /> */}
                             <h2 className="text-xl font-bold tracking-tight text-white">
-                                Growth Journal
+                                {MainContentData.Heading}
                             </h2>
 
                             <p className="text-sm text-gray-400">
-                                Build. Learn. Grow.
+                                {MainContentData.SubHeading}
                             </p>
                         </Link>
 

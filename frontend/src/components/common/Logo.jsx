@@ -1,5 +1,5 @@
 import { TrendingUp } from "lucide-react";
-
+import { MainContentData } from "../../data/ChangebleData";
 export default function Logo() {
   return (
     <div className="flex items-center gap-3 select-none">
@@ -9,11 +9,11 @@ export default function Logo() {
 
       <div>
         <h2 className="text-xl font-bold tracking-tight text-white">
-          Growth Journal
+          {MainContentData.Heading}
         </h2>
 
         <p className="text-sm text-gray-400">
-          Build. Learn. Grow.
+          {MainContentData.SubHeading}
         </p>
       </div>
     </div>
