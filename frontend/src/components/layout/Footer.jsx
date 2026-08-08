@@ -1,132 +1,140 @@
 import { Link } from "react-router-dom";
 
 import Logo from "../common/Logo";
-
+import { MainContentData } from "../../data/ChangebleData";
 const product = [
-  "Features",
-  "Community",
-  "Goals",
-  "Roadmap",
+    "Features",
+    "Community",
+    "Goals",
+    "Roadmap",
 ];
 
 const resources = [
-  "Support",
-  "Privacy",
-  "Terms",
-  "Contact",
+    "Support",
+    "Privacy",
+    "Terms",
+    "Contact",
 ];
 
 const social = [
-  "GitHub",
-  "LinkedIn",
-  "Twitter",
+    "GitHub",
+    "LinkedIn",
+    "Twitter",
 ];
 
 export default function Footer() {
-  return (
-    <footer className="border-t border-white/10 bg-[#111827]">
+    return (
+        <footer className="border-t border-white/10 bg-[#111827]">
 
-      <div className="mx-auto max-w-7xl px-6 py-16">
+            <div className="mx-auto max-w-7xl px-6 py-16">
 
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
 
-          <div>
+                    <div>
 
-            <Logo />
+                        <div>
+                            <h2 className="text-xl font-bold tracking-tight text-white">
+                                {MainContentData.Heading}
+                            </h2>
 
-            <p className="mt-6 max-w-xs leading-7 text-gray-400">
-              Build better habits, share daily progress,
-              and grow together with people who show up
-              every day.
-            </p>
+                            <p className="text-sm text-gray-400">
+                                {MainContentData.SubHeading}
+                            </p>
+                        </div>
 
-          </div>
+                        <p className="mt-6 max-w-xs leading-7 text-gray-400">
+                            Build better habits, share daily progress,
+                            and grow together with people who show up
+                            every day.
+                        </p>
 
-          <div>
+                    </div>
 
-            <h3 className="mb-5 font-semibold text-white">
-              Product
-            </h3>
+                    <div>
 
-            <ul className="space-y-3">
+                        <h3 className="mb-5 font-semibold text-white">
+                            Product
+                        </h3>
 
-              {product.map((item) => (
-                <li key={item}>
-                  <Link
-                    to="/"
-                    className="text-gray-400 transition hover:text-white"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+                        <ul className="space-y-3">
 
-            </ul>
+                            {product.map((item) => (
+                                <li key={item}>
+                                    <Link
+                                        to="/"
+                                        className="text-gray-400 transition hover:text-white"
+                                    >
+                                        {item}
+                                    </Link>
+                                </li>
+                            ))}
 
-          </div>
+                        </ul>
 
-          <div>
+                    </div>
 
-            <h3 className="mb-5 font-semibold text-white">
-              Resources
-            </h3>
+                    <div>
 
-            <ul className="space-y-3">
+                        <h3 className="mb-5 font-semibold text-white">
+                            Resources
+                        </h3>
 
-              {resources.map((item) => (
-                <li key={item}>
-                  <Link
-                    to="/"
-                    className="text-gray-400 transition hover:text-white"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+                        <ul className="space-y-3">
 
-            </ul>
+                            {resources.map((item) => (
+                                <li key={item}>
+                                    <Link
+                                        to="/"
+                                        className="text-gray-400 transition hover:text-white"
+                                    >
+                                        {item}
+                                    </Link>
+                                </li>
+                            ))}
 
-          </div>
+                        </ul>
 
-          <div>
+                    </div>
 
-            <h3 className="mb-5 font-semibold text-white">
-              Social
-            </h3>
+                    <div>
 
-            <ul className="space-y-3">
+                        <h3 className="mb-5 font-semibold text-white">
+                            Social
+                        </h3>
 
-              {social.map((item) => (
-                <li key={item}>
-                  <Link
-                    to="/"
-                    className="text-gray-400 transition hover:text-white"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+                        <ul className="space-y-3">
 
-            </ul>
+                            {social.map((item) => (
+                                <li key={item}>
+                                    <Link
+                                        to="/"
+                                        className="text-gray-400 transition hover:text-white"
+                                    >
+                                        {item}
+                                    </Link>
+                                </li>
+                            ))}
 
-          </div>
+                        </ul>
 
-        </div>
+                    </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-gray-500 md:flex-row">
+                </div>
 
-          <p>
-            © 2026 Growth Journal. All rights reserved.
-          </p>
+                <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-gray-500 md:flex-row">
 
-          <p>
-            Build • Learn • Grow
-          </p>
+                    <p>
+                        © 2026 {MainContentData.Heading}. All rights reserved.
+                    </p>
 
-        </div>
+                    <p>
+                        {MainContentData.SubHeading}
+                    </p>
 
-      </div>
+                </div>
 
-    </footer>
-  );
+            </div>
+
+        </footer>
+    );
 }
