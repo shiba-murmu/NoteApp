@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const PageNotFound = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-zinc-950 text-white px-4">
-      <h1 className="text-8xl font-bold text-cyan-400">404</h1>
+      <h1 className="text-8xl font-bold text-(--primary)">404</h1>
 
       <h2 className="text-3xl font-semibold mt-4">
         Page Not Found
@@ -15,7 +15,7 @@ const PageNotFound = () => {
 
       <Link
         to="/"
-        className="mt-8 bg-cyan-500 hover:bg-cyan-600 px-6 py-3 rounded-lg transition"
+        className="mt-8 bg-(--primary) hover:bg-(--primary-hover) px-6 py-3 rounded-lg transition"
       >
         Go Home
       </Link>
