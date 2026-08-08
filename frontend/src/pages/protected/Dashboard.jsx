@@ -1,10 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Menu, Bell } from "lucide-react";
 
 import DashboardSidebar from "./dashboard/DashboardSidebar";
 
 const Dashboard = () => {
+    const getPageTitle = (pathname) => {
+
+        if (pathname === "/dashboard") {
+            return "Dashboard";
+        }
+
+        if (pathname.startsWith("/dashboard/notes")) {
+            return "My Notes";
+        }
+
+        if (pathname.startsWith("/dashboard/tasks")) {
+            return "Tasks";
+        }
+
+        if (pathname.startsWith("/dashboard/community")) {
+            return "Community";
+        }
+
+        if (pathname.startsWith("/dashboard/calendar")) {
+            return "Calendar";
+        }
+
+        if (pathname.startsWith("/dashboard/profile")) {
+            return "Profile";
+        }
+
+        if (pathname.startsWith("/dashboard/settings")) {
+            return "Settings";
+        }
+
+        return "Dashboard";
+    };
+    const location = useLocation();
+
+    const pageTitle = getPageTitle(location.pathname);
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     // Lock background/page scrolling when mobile sidebar is open
@@ -112,7 +147,7 @@ const Dashboard = () => {
 
                         <div>
                             <h2 className="text-lg font-semibold text-white">
-                                Dashboard
+                                {pageTitle}
                             </h2>
                         </div>
 
