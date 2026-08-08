@@ -34,7 +34,10 @@ const Dashboard = () => {
         if (pathname.startsWith("/dashboard/settings")) {
             return "Settings";
         }
-
+        if (pathname
+            .startsWith("/dashboard/feed")) {
+            return "Feed";
+        }
         return "Dashboard";
     };
     const location = useLocation();

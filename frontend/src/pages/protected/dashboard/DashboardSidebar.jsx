@@ -10,6 +10,7 @@ import {
     UserCircle,
     LogOut,
     X,
+    Rss,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -20,10 +21,17 @@ const DashboardSidebar = ({
 }) => {
 
     const menuItems = [
+        // If any of the menu items are added or removed, make sure to update the getPageTitle function in Dashboard.jsx accordingly.
         {
             name: "Home",
             path: "/dashboard",
             icon: Home,
+        },
+        {
+            name: "Feed",
+            path: "/dashboard/feed",
+            icon: Rss,
+
         },
         {
             name: "My Notes",
@@ -45,6 +53,7 @@ const DashboardSidebar = ({
             path: "/dashboard/calendar",
             icon: CalendarDays,
         },
+
     ];
 
     const handleNavigation = () => {
