@@ -7,6 +7,7 @@ import ScrollToTop from './components/common/ScrollToTop'
 import PageNotFound from './pages/PageNotFound'
 import Dashboard from './pages/protected/Dashboard'
 import DashboardHome from './pages/protected/dashboard/DashboardHome'
+import Profile from './pages/protected/profile/Profile'
 function App() {
     return (
         <>
@@ -18,6 +19,7 @@ function App() {
                 <Route path='/dashboard' element={<Dashboard />} >
                     <Route index element={<DashboardHome />} />
                     <Route path="*" element={<PageNotFound />} />
+                    <Route path="/dashboard/profile" element={<Profile />} />
                 </Route >
 
                 {/* 404 Route */}
