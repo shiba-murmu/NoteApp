@@ -1,5 +1,5 @@
 import React from "react";
-
+import { toast } from "sonner";
 import {
     Home,
     FileText,
@@ -13,12 +13,21 @@ import {
     Rss,
 } from "lucide-react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink , useNavigate} from "react-router-dom";
 
 const DashboardSidebar = ({
     sidebarOpen,
     onClose,
 }) => {
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        toast.success("You have been logged out.");
+        navigate("/login", {
+            replace : true,
+        });
+    };
 
     const menuItems = [
         // If any of the menu items are added or removed, make sure to update the getPageTitle function in Dashboard.jsx accordingly.
@@ -475,6 +484,7 @@ const DashboardSidebar = ({
                     {/* Logout */}
 
                     <button
+                    onClick={handleLogout}
                         className="
                             flex
                             h-8

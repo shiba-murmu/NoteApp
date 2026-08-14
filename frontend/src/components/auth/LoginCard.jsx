@@ -1,133 +1,299 @@
+import { useState } from "react";
 import { Mail, Lock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+import api from "../../services/api";
+import { toast } from "sonner";
 import Card from "../common/Card";
 import Button from "../common/Button";
 import AuthInput from "./AuthInput";
 
 export default function LoginCard() {
-  return (
-   <Card className="w-full md:mt-10 max-w-[560px] p-6 sm:p-8 lg:p-10">
 
-      {/* Heading */}
+    const navigate = useNavigate();
 
-      <div className="space-y-3">
+    // ==============================
+    // Form State
+    // ==============================
 
-        <span className="inline-flex rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
-          Welcome Back
-        </span>
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-        <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          Let's make today count.
-        </h2>
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-        <p className="leading-7 text-gray-400">
-          Continue building your goals, sharing your progress,
-          and growing with the community.
-        </p>
 
-      </div>
+    // ==============================
+    // Login Handler
+    // ==============================
 
-      {/* Form */}
+    const handleLogin = async (e) => {
 
-      <form className="mt-10 space-y-6">
+        e.preventDefault();
 
-        <AuthInput
-          label="Email"
-          type="email"
-          placeholder="Enter your email"
-          icon={Mail}
-        />
+        setError("");
 
-        <AuthInput
-          label="Password"
-          type="password"
-          placeholder="Enter your password"
-          icon={Lock}
-        />
 
-        {/* Options */}
+        // ==============================
+        // Basic Validation
+        // ==============================
 
-        <div className="flex items-center justify-between text-sm">
+        if (!email || !password) {
+            setError("Please enter your email and password.");
+            return;
+        }
 
-          <label className="flex cursor-pointer items-center gap-3 text-gray-400">
 
-            <input
-              type="checkbox"
-              className="h-4 w-4 rounded accent-emerald-500"
-            />
+        try {
 
-            Remember me
+            setLoading(true);
 
-          </label>
 
-          <Link
-            to="/forgot-password"
-            className="font-medium text-emerald-400 transition hover:text-emerald-300"
-          >
-            Forgot Password?
-          </Link>
+            // ==============================
+            // Send Login Request
+            // ==============================
 
-        </div>
+            const response = await api.post(
+                "/auth/login",
+                {
+                    email,
+                    password,
+                }
+            );
 
-        {/* Button */}
 
-        <Button
-          type="submit"
-          size="lg"
-          className="w-full rounded-2xl"
-        >
-          Sign In
-        </Button>
+            const data = response.data;
 
-      </form>
 
-      {/* Divider */}
+            // ==============================
+            // Store JWT
+            // ==============================
 
-      <div className="my-8 flex items-center">
+            localStorage.setItem(
+                "accessToken",
+                data.token
+            );
 
-        <div className="h-px flex-1 bg-white/10" />
 
-        <span className="px-4 text-xs uppercase tracking-[3px] text-gray-500">
-          or
-        </span>
+            // ==============================
+            // Navigate to Dashboard
+            // ==============================
 
-        <div className="h-px flex-1 bg-white/10" />
+            toast.success("Welcome back!");
 
-      </div>
+            navigate("/dashboard");
 
-      {/* Google */}
 
-      <Button
-        variant="outline"
-        size="lg"
-        className="w-full gap-3"
-      >
-        <img
-          src="https://www.svgrepo.com/show/475656/google-color.svg"
-          alt="Google"
-          className="h-5 w-5"
-        />
+        } catch (error) {
 
-        Continue with Google
+            console.error(
+                "Login error:",
+                error
+            );
 
-      </Button>
+            toast.error(
+                error.response?.data?.message ||
+                "Unable to connect to the server."
+            );
 
-      {/* Footer */}
 
-      <p className="mt-8 text-center text-gray-400">
+            // ==============================
+            // Backend Error
+            // ==============================
 
-        Don't have an account?
+            if (error.response) {
 
-        <Link
-          to="/register"
-          className="ml-2 font-semibold text-emerald-400 transition hover:text-emerald-300"
-        >
-          Create Account
-        </Link>
+                setError(
+                    error.response.data?.message ||
+                    "Login failed."
+                );
 
-      </p>
+            } else {
 
-    </Card>
-  );
+                setError(
+                    "Unable to connect to the server."
+                );
+
+            }
+
+        } finally {
+
+            setLoading(false);
+
+        }
+
+    };
+
+
+    return (
+        <Card className="w-full md:mt-10 max-w-[560px] p-6 sm:p-8 lg:p-10">
+
+            {/* ==============================
+                Heading
+            ============================== */}
+
+            <div className="space-y-3">
+
+                <span className="inline-flex rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                    Welcome Back
+                </span>
+
+                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                    Let's make today count.
+                </h2>
+
+                <p className="leading-7 text-gray-400">
+                    Continue building your goals, sharing your progress,
+                    and growing with the community.
+                </p>
+
+            </div>
+
+
+            {/* ==============================
+                Login Form
+            ============================== */}
+
+            <form
+                onSubmit={handleLogin}
+                className="mt-10 space-y-6"
+            >
+
+                {/* Email */}
+
+                <AuthInput
+                    label="Email"
+                    type="email"
+                    placeholder="Enter your email"
+                    icon={Mail}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+
+
+                {/* Password */}
+
+                <AuthInput
+                    label="Password"
+                    type="password"
+                    placeholder="Enter your password"
+                    icon={Lock}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+
+                {/* Error */}
+
+                {error && (
+                    <p className="text-sm text-red-400">
+                        {error}
+                    </p>
+                )}
+
+
+                {/* ==============================
+                    Options
+                ============================== */}
+
+                <div className="flex items-center justify-between text-sm">
+
+                    <label className="flex cursor-pointer items-center gap-3 text-gray-400">
+
+                        <input
+                            type="checkbox"
+                            className="h-4 w-4 rounded accent-emerald-500"
+                        />
+
+                        Remember me
+
+                    </label>
+
+
+                    <Link
+                        to="/forgot-password"
+                        className="font-medium text-emerald-400 transition hover:text-emerald-300"
+                    >
+                        Forgot Password?
+                    </Link>
+
+                </div>
+
+
+                {/* ==============================
+                    Sign In
+                ============================== */}
+
+                <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full rounded-2xl"
+                    disabled={loading}
+                >
+                    {loading
+                        ? "Signing In..."
+                        : "Sign In"
+                    }
+                </Button>
+
+            </form>
+
+
+            {/* ==============================
+                Divider
+            ============================== */}
+
+            <div className="my-8 flex items-center">
+
+                <div className="h-px flex-1 bg-white/10" />
+
+                <span className="px-4 text-xs uppercase tracking-[3px] text-gray-500">
+                    or
+                </span>
+
+                <div className="h-px flex-1 bg-white/10" />
+
+            </div>
+
+
+            {/* ==============================
+                Google Login
+            ============================== */}
+
+            <Button
+                variant="outline"
+                size="lg"
+                className="w-full gap-3"
+            >
+
+                <img
+                    src="https://www.svgrepo.com/show/475656/google-color.svg"
+                    alt="Google"
+                    className="h-5 w-5"
+                />
+
+                Continue with Google
+
+            </Button>
+
+
+            {/* ==============================
+                Footer
+            ============================== */}
+
+            <p className="mt-8 text-center text-gray-400">
+
+                Don't have an account?
+
+                <Link
+                    to="/register"
+                    className="ml-2 font-semibold text-emerald-400 transition hover:text-emerald-300"
+                >
+                    Create Account
+                </Link>
+
+            </p>
+
+        </Card>
+    );
 }
