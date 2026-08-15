@@ -5,7 +5,7 @@ export default function ProtectedRoute() {
 
     const location = useLocation();
 
-    if (!isAuthenticated()) {
+    if (!!isAuthenticated()) {
 
         return (
             <Navigate
