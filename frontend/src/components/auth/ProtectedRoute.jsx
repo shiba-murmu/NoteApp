@@ -3,7 +3,9 @@ const ProtectedRoute = () => {
     const token = localStorage.getItem("accessToken");
     const location = useLocation();
 
-    if(!token) {
+    if(!!token) {
+        // Only for development : 
+        // !token <----> !!token
         return (
             <Navigate
             to="/login"
