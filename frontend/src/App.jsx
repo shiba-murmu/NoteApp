@@ -4,16 +4,19 @@ import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import RegisterPage from './pages/RegisterPage'
 
+// public routes.
 import LandingPage from './pages/LandingPage'
 import ScrollToTop from './components/common/ScrollToTop'
 import PageNotFound from './pages/PageNotFound'
 
+// Protected routes ...
 import Dashboard from './pages/protected/Dashboard'
 import DashboardHome from './pages/protected/dashboard/DashboardHome'
-
 import Profile from './pages/protected/profile/Profile';
+
 import { Toaster } from "sonner";
 
+// Routes guards
 
 import GuestRoute from './components/auth/GuestRoute'
 import ProtectedRoute from './components/auth/ProtectedRoute'
@@ -59,7 +62,7 @@ function App() {
                     <Route path="/register" element={<RegisterPage />} />
                 </Route>
 
-                
+
                 <Route element={<ProtectedRoute />} >
                     <Route path='/dashboard' element={<Dashboard />} >
                         <Route index element={<DashboardHome />} />
