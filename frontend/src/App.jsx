@@ -1,15 +1,24 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+
 import Login from './pages/Login'
-import LandingPage from './pages/LandingPage'
 import RegisterPage from './pages/RegisterPage'
+
+import LandingPage from './pages/LandingPage'
 import ScrollToTop from './components/common/ScrollToTop'
 import PageNotFound from './pages/PageNotFound'
+
 import Dashboard from './pages/protected/Dashboard'
 import DashboardHome from './pages/protected/dashboard/DashboardHome'
+
 import Profile from './pages/protected/profile/Profile';
-import ProtectedRoute from './components/auth/ProtectedRoute'
 import { Toaster } from "sonner";
+
+
+import GuestRoute from './components/auth/GuestRoute'
+import ProtectedRoute from './components/auth/ProtectedRoute'
+import HomeRoute from './components/auth/HomeRoute'
+
 function App() {
     return (
         <>
@@ -42,9 +51,15 @@ function App() {
                 }}
             />
             <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/" element={<HomeRoute />} />
+
+                <Route
+                    element={<GuestRoute />} >
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                </Route>
+
+                
                 <Route element={<ProtectedRoute />} >
                     <Route path='/dashboard' element={<Dashboard />} >
                         <Route index element={<DashboardHome />} />
