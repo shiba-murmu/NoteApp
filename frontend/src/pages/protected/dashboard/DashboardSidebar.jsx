@@ -14,12 +14,16 @@ import {
 } from "lucide-react";
 
 import { NavLink , useNavigate} from "react-router-dom";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { getInitial } from "../../../utils/getInitials";
 
 const DashboardSidebar = ({
     sidebarOpen,
     onClose,
 }) => {
-
+    
+    const {data : user} = useCurrentUser();
+    const nameFirstLetter = getInitial(user?.name)
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
@@ -449,7 +453,7 @@ const DashboardSidebar = ({
                             text-emerald-400
                         "
                     >
-                        S
+                        {nameFirstLetter}
                     </div>
 
 
@@ -465,7 +469,7 @@ const DashboardSidebar = ({
                                 text-white
                             "
                         >
-                            Shiba Murmu
+                            {user?.name}
                         </p>
 
                         <p

@@ -5,8 +5,13 @@ import {
     Sparkles,
     ArrowUpRight,
 } from "lucide-react";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { getFirstName } from "../../../utils/getFirstName";
 
 const WelcomeBanner = () => {
+    const {data : user} = useCurrentUser();
+    const firstName = getFirstName(user?.name);
+
     const hour = new Date().getHours();
 
     let greeting = "Good Morning";
@@ -51,7 +56,7 @@ const WelcomeBanner = () => {
                     <h1 className="text-3xl font-bold leading-tight text-white md:text-4xl">
                         {greeting},{" "}
                         <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-                            Shiba 👋
+                            {firstName} 👋
                         </span>
                     </h1>
 

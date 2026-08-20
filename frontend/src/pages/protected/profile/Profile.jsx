@@ -16,9 +16,11 @@ import {
     Settings,
 } from "lucide-react";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
+import { getInitial } from "../../../utils/getInitials";
 
 const Profile = () => {
     const { data : user } = useCurrentUser();
+    const nameFirstLetter = getInitial(user?.name)
     
     return (
         <div className="min-h-screen bg-[#030712] p-4 sm:p-6 lg:p-8">
@@ -175,7 +177,7 @@ const Profile = () => {
                                         shadow-2xl
                                         shadow-emerald-500/10
                                     ">
-                                        S
+                                        {nameFirstLetter}
                                     </div>
 
 
@@ -504,13 +506,13 @@ const Profile = () => {
                             <ProfileField
                                 icon={User}
                                 label="Full Name"
-                                value="Shiba Murmu"
+                                value={user?.name}
                             />
 
                             <ProfileField
                                 icon={Mail}
                                 label="Email"
-                                value="shiba@example.com"
+                                value={user?.email}
                             />
 
                             <ProfileField

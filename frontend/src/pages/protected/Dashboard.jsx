@@ -3,10 +3,14 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Menu, Bell } from "lucide-react";
 
 import DashboardSidebar from "./dashboard/DashboardSidebar";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { getInitial } from "../../utils/getInitials";
 
 const Dashboard = () => {
+    const { data : user } = useCurrentUser();
+    const nameFirstLetter = getInitial(user?.name)
     const getPageTitle = (pathname) => {
-
+    
         if (pathname === "/dashboard") {
             return "Dashboard";
         }
@@ -202,7 +206,7 @@ const Dashboard = () => {
                                 ring-emerald-500/20
                             "
                         >
-                            S
+                            {nameFirstLetter}
                         </div>
 
                     </div>
