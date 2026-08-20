@@ -15,8 +15,11 @@ import {
     Sparkles,
     Settings,
 } from "lucide-react";
+import { useCurrentUser } from "../../../hooks/useCurrentUser";
 
 const Profile = () => {
+    const { data : user } = useCurrentUser();
+    
     return (
         <div className="min-h-screen bg-[#030712] p-4 sm:p-6 lg:p-8">
 
@@ -218,7 +221,7 @@ const Profile = () => {
                                         text-white
                                         sm:text-3xl
                                     ">
-                                        Shiba Murmu
+                                        {user?.name}
                                     </h1>
 
                                     <p className="

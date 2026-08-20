@@ -2,14 +2,17 @@ import { useState } from "react";
 import { Mail, Lock } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
+
 import api from "../../services/api";
 import { toast } from "sonner";
 import Card from "../common/Card";
 import Button from "../common/Button";
 import AuthInput from "./AuthInput";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function LoginCard() {
 
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     // ==============================
@@ -73,6 +76,15 @@ export default function LoginCard() {
                 "accessToken",
                 data.token
             );
+            await queryClient.fetchQuery(
+                {
+                    queryKey: ["currentUser"],
+                    queryFn: async () => {
+                        const response = await api.get("/auth/me");
+                        return response.data.user;
+                    },
+                }
+            )
 
 
             // ==============================

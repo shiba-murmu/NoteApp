@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   FileText,
   CheckSquare,
@@ -9,46 +8,51 @@ import {
 
 import StatCard from "./StatCard";
 
+const stats = [
+  {
+    title: "Total Notes",
+    value: "126",
+    change: "+12 this week",
+    icon: FileText,
+    iconColor: "text-cyan-400",
+    glow: "from-cyan-500/20 to-blue-500/5",
+    progress: 82,
+  },
+  {
+    title: "Pending Tasks",
+    value: "08",
+    change: "2 due today",
+    icon: CheckSquare,
+    iconColor: "text-emerald-400",
+    glow: "from-emerald-500/20 to-green-500/5",
+    progress: 45,
+  },
+  {
+    title: "Current Streak",
+    value: "15 Days",
+    change: "Keep going 🚀",
+    icon: Flame,
+    iconColor: "text-orange-400",
+    glow: "from-orange-500/20 to-red-500/5",
+    progress: 100,
+  },
+  {
+    title: "Productivity",
+    value: "89%",
+    change: "+6% this week",
+    icon: TrendingUp,
+    iconColor: "text-violet-400",
+    glow: "from-violet-500/20 to-purple-500/5",
+    progress: 89,
+  },
+];
+
 const StatsGrid = () => {
   return (
-    <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-
-      <StatCard
-        title="Total Notes"
-        value="126"
-        change="+12 this week"
-        icon={FileText}
-        iconColor="text-blue-400"
-        iconBg="bg-blue-500/10"
-      />
-
-      <StatCard
-        title="Pending Tasks"
-        value="08"
-        change="2 due today"
-        icon={CheckSquare}
-        iconColor="text-emerald-400"
-        iconBg="bg-emerald-500/10"
-      />
-
-      <StatCard
-        title="Current Streak"
-        value="15 Days"
-        change="Keep going"
-        icon={Flame}
-        iconColor="text-orange-400"
-        iconBg="bg-orange-500/10"
-      />
-
-      <StatCard
-        title="Productivity"
-        value="89%"
-        change="+6% this week"
-        icon={TrendingUp}
-        iconColor="text-purple-400"
-        iconBg="bg-purple-500/10"
-      />
-
+    <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      {stats.map((stat) => (
+        <StatCard key={stat.title} {...stat} />
+      ))}
     </section>
   );
 };

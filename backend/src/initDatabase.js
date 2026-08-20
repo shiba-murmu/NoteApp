@@ -11,4 +11,4 @@ db.exec(`
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP       
     )
     `);
-console.log("Users table created successfully");
+// console.log("Users table created successfully"); For development purpose ..

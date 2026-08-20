@@ -68,88 +68,122 @@ const registerUser = async (req, res) => {
   });
 };
 
-
 // =======================
 // Login User
 // =======================
 
-const loginUser = async(req, res) => {
-    try {
-        const {
-            email,
-            password,
-        } = req.body;
-        // ===================
-        // Validate fields
-        //======================
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    // ===================
+    // Validate fields
+    //======================
 
-        if (!email || !password) {
-            return res.status(400).json({
-                message : "Email and password are required.",
-            });
-        }
-        //=================
-        // find user
-        // ===============
-
-        const user = userRepo.findUserByEmail(email);
-
-        if(!user) {
-            return res.status(401).json({
-                message : "Invalid email or password.",
-            });
-        }
-        // ===========
-        // Compare password
-        // ===========
-
-        const passwordMatch = await bcrypt.compare(password, user.password);
-
-        if(!passwordMatch) {
-            return res.status(401).json({
-                message : "Invalid email or password.",
-            });
-        }
-
-        // ================
-        // Create JWT
-        // ===============
-
-        const token = jwt.sign(
-            {
-                id: user.id,
-                email: user.email,
-            },
-            process.env.JWT_SECRET,
-            {
-                expiresIn: "1h",
-            }
-        );
-        // =======
-        // response
-        //==========
-
-        return res.status(200).json({
-            message : "Login succesful.",
-            token,
-            user : {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                gender: user.gender,
-            },
-        });
-    } catch (error) {
-        console.error( "Login error:", error);
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Email and password are required.",
+      });
     }
-    return res.status(500).json({
-        message : "Something went wrong.",
+    //=================
+    // find user
+    // ===============
+
+    const user = userRepo.findUserByEmail(email);
+
+    if (!user) {
+      return res.status(401).json({
+        message: "Invalid email or password.",
+      });
+    }
+    // ===========
+    // Compare password
+    // ===========
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        message: "Invalid email or password.",
+      });
+    }
+
+    // ================
+    // Create JWT
+    // ===============
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      },
+    );
+    // =======
+    // response
+    //==========
+
+    return res.status(200).json({
+      message: "Login succesful.",
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        gender: user.gender,
+      },
     });
-}
+  } catch (error) {
+    console.error("Login error:", error);
+  }
+  return res.status(500).json({
+    message: "Something went wrong.",
+  });
+};
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Get current logged in user
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ==========================================
+// Get Current Logged In User
+// ==========================================
+
+const getCurrentUser = (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const user = userRepo.findUserById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const { password, ...safeUser } = user;
+
+    return res.status(200).json({
+      success: true,
+      user: safeUser,
+    });
+  } catch (error) {
+    console.error("Get User Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
+
 // ++++++++++
 // Export
 // ++++++++
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  getCurrentUser,
 };

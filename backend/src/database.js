@@ -9,6 +9,6 @@ const dbPath = path.join(
 
 const db = new Database(dbPath);
 
-console.log("Sql database connected successfully");
+// console.log("Sql database connected successfully"); for development purpose.
 
 module.exports = db;
