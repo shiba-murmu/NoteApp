@@ -17,11 +17,26 @@ import {
 } from "lucide-react";
 import { useCurrentUser } from "../../../hooks/useCurrentUser";
 import { getInitial } from "../../../utils/getInitials";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-    const { data : user } = useCurrentUser();
+    const { data: user } = useCurrentUser();
+    const navigate = useNavigate()
     const nameFirstLetter = getInitial(user?.name)
-    
+
+    const handleEditProfile = () => {
+        const username = user.name
+            .trim()
+            .toLowerCase()
+            .replace(/\s+/g, "-"); // "Shiba Murmu" -> "shiba-murmu"
+
+            navigate(`/dashboard/profile/edit/${username}`);
+    };
+
+    const handleSetting = () => {
+        navigate("/dashboard/setting");
+    }
+
     return (
         <div className="min-h-screen bg-[#030712] p-4 sm:p-6 lg:p-8">
 
@@ -280,8 +295,10 @@ const Profile = () => {
                             ">
 
                                 <button
+                                    onClick={handleEditProfile}
                                     type="button"
                                     className="
+                                        cursor-pointer
                                         flex
                                         items-center
                                         gap-2
@@ -307,9 +324,11 @@ const Profile = () => {
 
 
                                 <button
+                                    onClick={handleSetting}
                                     type="button"
                                     aria-label="Profile settings"
                                     className="
+                                    cursor-pointer
                                         flex
                                         h-10
                                         w-10

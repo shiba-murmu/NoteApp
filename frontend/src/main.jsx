@@ -22,7 +22,7 @@ function Layout() {
         "/calendar",
         "/messages",
         "/analytics",
-        "/settings",
+        "/setting",
     ]
 
     // Routes that should NOT show the landing navbar/footer

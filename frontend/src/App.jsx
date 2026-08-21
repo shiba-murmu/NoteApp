@@ -15,6 +15,7 @@ import Dashboard from './pages/protected/Dashboard'
 import DashboardHome from './pages/protected/dashboard/DashboardHome'
 import Profile from './pages/protected/profile/Profile';
 import EditProfile from './pages/protected/profile/profilesetting/EditProfile';
+import Setting from './pages/protected/setting/Setting';
 
 // Routes guards
 
@@ -70,6 +71,7 @@ function App() {
                         <Route path="*" element={<PageNotFound />} />
                         <Route path="/dashboard/profile" element={<Profile />} />
                         <Route path="/dashboard/profile/edit/:username" element={<EditProfile />} />
+                        <Route path="/dashboard/setting" element={<Setting />} />
                     </Route >
                 </Route>
                 {/* 404 Route */}

@@ -35,8 +35,8 @@ const Dashboard = () => {
             return "Profile";
         }
 
-        if (pathname.startsWith("/dashboard/settings")) {
-            return "Settings";
+        if (pathname.startsWith("/dashboard/setting")) {
+            return "Setting";
         }
         if (pathname
             .startsWith("/dashboard/feed")) {

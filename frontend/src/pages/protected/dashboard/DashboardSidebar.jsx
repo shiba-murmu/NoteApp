@@ -360,7 +360,7 @@ const DashboardSidebar = ({
                     {/* Settings */}
 
                     <NavLink
-                        to="/dashboard/settings"
+                        to="/dashboard/setting"
                         onClick={handleNavigation}
                         className={({ isActive }) =>
                             `
