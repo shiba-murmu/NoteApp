@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { Toaster } from "sonner";
 
 import Login from './pages/Login'
 import RegisterPage from './pages/RegisterPage'
@@ -13,8 +14,7 @@ import PageNotFound from './pages/PageNotFound'
 import Dashboard from './pages/protected/Dashboard'
 import DashboardHome from './pages/protected/dashboard/DashboardHome'
 import Profile from './pages/protected/profile/Profile';
-
-import { Toaster } from "sonner";
+import EditProfile from './pages/protected/profile/profilesetting/EditProfile';
 
 // Routes guards
 
@@ -69,6 +69,7 @@ function App() {
                         <Route index element={<DashboardHome />} />
                         <Route path="*" element={<PageNotFound />} />
                         <Route path="/dashboard/profile" element={<Profile />} />
+                        <Route path="/dashboard/profile/edit/:username" element={<EditProfile />} />
                     </Route >
                 </Route>
                 {/* 404 Route */}
